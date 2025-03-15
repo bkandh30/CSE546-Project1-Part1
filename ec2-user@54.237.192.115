@@ -1,0 +1,37 @@
+import os
+import boto3
+from fastapi import FastAPI, File, UploadFile, HTTPException, status
+
+S3_BUCKET = "122959282-in-bucket"
+SIMPLE_DB_DOMAIN = "122959282-simpleDB"
+REGION = "us-east-1"
+
+s3 = boto3.client("s3", region_name=REGION)
+sdb = boto3.client("sdb", region_name=REGION)
+#Initialize the FastAPI app
+app = FastAPI()
+
+@app.post("/")
+async def upload_file(inputFile: UploadFile = File(...)):
+    try:
+        #Split the filename to get the name without the .jpg extension
+        imageName = inputFile.filename.split(".")[0]
+        imageObj = inputFile.file
+        imageNameWithExtension = inputFile.filename
+
+        # Upload the file to S3
+        s3.upload_fileobj(imageObj, S3_BUCKET, imageNameWithExtension)
+        
+        #Query SimpleDB for classification results
+        classification_query = f"SELECT Results FROM `{SIMPLE_DB_DOMAIN}` WHERE itemName() = '{imageName}'"
+        response = sdb.select(SelectExpression=classification_query)
+
+        #Return the classification results
+        if response['Items']:
+            prediction = response['Items'][0]['Attributes'][0]['Value']
+            return f"{imageName}:{prediction}"
+        else:
+            return f"{imageName}:No prediction found"
+        
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
