@@ -2,9 +2,9 @@ import os
 import boto3
 from flask import Flask, request, Response
 
-S3_BUCKET = "1229592821-in-bucket"
-SIMPLE_DB_DOMAIN = "1229592821-simpleDB"
-REGION = "us-east-1"
+#S3_BUCKET = 
+#SIMPLE_DB_DOMAIN = 
+#REGION = 
 
 s3 = boto3.client("s3", region_name=REGION)
 sdb = boto3.client("sdb", region_name=REGION)

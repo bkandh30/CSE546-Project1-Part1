@@ -1,0 +1,80 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Python Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+# NOTE: If your venv is named differently, add that name here.
+
+# Sensitive Files
+*.pem
+ec2-user@54.237.192.115
+*.env
+.env.*
+secrets.*
+credentials.*
+
+# Data files & Archives
+# Add specific large data files or archives you don't want in git
+face_images_1000.zip
+*.zip
+*.tar.gz
+*.tgz
+
+# Log files
+*.log
+logs/
+*.log.*
+
+# Generated Results/Reports (if applicable)
+*.csv
+*.xlsx
+# Add specific result file patterns if needed, e.g.:
+# Classification Results*.xlsx
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor specific files
+.vscode/
+.idea/
+*.suo
+*.user
+*.sln.docstates
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Temporary files
+*.tmp
+*~
